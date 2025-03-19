@@ -48,7 +48,6 @@ describe("WordleBoard", () => {
       {wordOfTheDay: "FLY", reason: 'word of the day must have exactly 5 characters'},
       {wordOfTheDay: "tests", reason: 'word of the day must be in uppercase'},
       {wordOfTheDay: "QWERT", reason: 'word of the day must be a valid English Word'},
-
     ])
     ("Since $reason:  $wordOfTheDay is invalid, therefore a warning ", async ({wordOfTheDay}) => {
       mount(WordleBoard, {props:{wordOfTheDay}})
@@ -69,8 +68,6 @@ describe("WordleBoard", () => {
       await playerSubmitGuess("QWERT")
       expect (wrapper.text()).not.toContain(VICTORY_MESSAGE)
       expect (wrapper.text()).not.toContain(DEFEAT_MESSAGE)
-
-
     })
     it("player guesses are not case-sensitive", async()=>{
       await playerSubmitGuess(wordOfTheDay.toLowerCase())
@@ -80,9 +77,9 @@ describe("WordleBoard", () => {
       await playerSubmitGuess("H3!RT")
       expect(wrapper.find<HTMLInputElement>('input[type="text"]').element.value).toEqual("HRT")
     })
-
+    it("non-letter characters do not render on the screen while being typed", async () => {
+      await playerSubmitGuess("123")
+      expect(wrapper.find<HTMLInputElement>('input[type="text"]').element.value).toEqual("")
+    })
   })
-
- 
-
 })
