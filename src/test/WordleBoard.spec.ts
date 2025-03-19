@@ -72,7 +72,10 @@ describe("WordleBoard", () => {
 
 
     })
-    it.todo("player guesses are not case-sensitive")
+    it("player guesses are not case-sensitive", async()=>{
+      await playerSubmitGuess(wordOfTheDay.toLowerCase())
+      expect (wrapper.text()).toContain(VICTORY_MESSAGE)
+    })
     it.todo("player guesses can only contain letters")
 
   })
