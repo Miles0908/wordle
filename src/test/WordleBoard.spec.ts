@@ -1,6 +1,6 @@
 
 import {mount} from "@vue/test-utils"
-import {describe, expect, it, beforeEach} from "vitest"
+import {describe, expect, it, beforeEach, vi} from "vitest"
 import WordleBoard from "../components/WordleBoard.vue"
 import { VICTORY_MESSAGE , DEFEAT_MESSAGE} from "../settings"
 
@@ -34,5 +34,16 @@ describe("WordleBoard", () => {
     expect(wrapper.text()).not.toContain(VICTORY_MESSAGE)
 
     expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
+  })
+
+  it("if a word of the day provided does not have exactly 5 letters, a waring message appears", async () => {
+    console.warn = vi.fn()
+    mount(WordleBoard, {props:{wordOfTheDay: "FLY"}})
+    expect(console.warn).toHaveBeenCalled()
+  })
+  it("if a word of the day is not all in uppercase, a waring message appears", async () => {
+    console.warn = vi.fn()
+    mount(WordleBoard, {props:{wordOfTheDay: "tests"}})
+    expect(console.warn).toHaveBeenCalled()
   })
 })
