@@ -78,6 +78,11 @@ describe("WordleBoard", () => {
             await wrapper.find("input[type=text]").trigger("blur")
             expect(document.activeElement).toBe(wrapper.find("input[type=text]").element)
         })
+        test("the input gets cleared after each submission", async () => {
+          await playerSubmitsGuess("WRONG")
+          expect(wrapper.find<HTMLInputElement>("input[type=text]").element.value).toEqual("")
+        })
+
         test(`player guesses are limited to ${WORD_SIZE} letters`, async () => {
             await playerSubmitsGuess(wordOfTheDay + "EXTRA")
             expect(wrapper.text()).toContain(VICTORY_MESSAGE)
@@ -100,5 +105,15 @@ describe("WordleBoard", () => {
             await playerSubmitsGuess("123")
             expect(wrapper.find<HTMLInputElement>("input[type=text]").element.value).toEqual("")
         })
+    })
+    test("all previous guesses done by the player are visible in the page", async () => {
+      const guesses = ["WRONG", "GUESS", "HELLO", "WORLD", "HAPPY", "CODER"]
+      for  ( const guess of guesses) {
+        await playerSubmitsGuess(guess)
+      }
+      for ( const guess of guesses) {
+        expect(wrapper.text()).toContain(guess)
+      }
+
     })
 })
