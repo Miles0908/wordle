@@ -61,7 +61,10 @@ describe("WordleBoard", () => {
     })
   })
   describe("Player input", () => {
-    it.todo("player guesses are limited to 5 characters")
+    it("player guesses are limited to 5 characters", async ()=>{
+      await playerSubmitGuess(wordOfTheDay + "EXTRA")
+      expect (wrapper.text()).toContain(VICTORY_MESSAGE)
+    })
     it.todo("player guesses can only be submitted if they are real English words")
     it.todo("player guesses are not case-sensitive")
     it.todo("player guesses can only contain letters")
