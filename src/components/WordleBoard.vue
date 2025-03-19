@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { VICTORY_MESSAGE } from "../settings"
 defineProps<{ msg: string, wordOfTheDay?: string }>()
 
 </script>
@@ -8,5 +8,5 @@ defineProps<{ msg: string, wordOfTheDay?: string }>()
   <p>{{ msg }}</p>
   <input type="text">
   <!-- <p>{{ wordOfTheDay }}</p> -->
-   <p>You've won!</p>
+   <p>{{ VICTORY_MESSAGE }}</p>
 </template>

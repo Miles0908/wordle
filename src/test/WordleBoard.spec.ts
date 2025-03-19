@@ -2,6 +2,7 @@
 import {mount} from "@vue/test-utils"
 import {describe, expect, it} from "vitest"
 import WordleBoard from "../components/WordleBoard.vue"
+import { VICTORY_MESSAGE } from "../settings"
 
 
 describe("WordleBoard", () => {
@@ -16,6 +17,6 @@ describe("WordleBoard", () => {
     await guessInput.trigger("keydown.enter")
 
 
-    expect(wrapper.text()).toContain("You've won!")
+    expect(wrapper.text()).toContain(VICTORY_MESSAGE)
   })
 })
