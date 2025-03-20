@@ -1,21 +1,23 @@
 <script lang="ts" setup>
-import {WORD_SIZE} from "../settings"
+import { WORD_SIZE } from "../settings";
 
-defineProps<{guess: string}>()
+defineProps<{ guess: string }>();
 </script>
 
 <template>
   <ul class="word">
-    <li v-for="(letter, index) in guess.padEnd(WORD_SIZE, ' ')"
-        :key="`${letter}-${index}`"
-        :data-letter="letter"
-        class="letter"
-        v-text="letter"/>
+    <li
+      v-for="(letter, index) in guess.padEnd(WORD_SIZE, ' ')"
+      :key="`${letter}-${index}`"
+      :data-letter="letter"
+      class="letter"
+      v-text="letter"
+    />
   </ul>
 </template>
 
 <style scoped>
-ul{
+ul {
   margin: 0;
   padding: 0;
 }
